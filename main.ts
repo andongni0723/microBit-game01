@@ -21,6 +21,21 @@ function Hp_Check () {
         basic.showNumber(game.score())
     }
 }
+input.onButtonPressed(Button.A, function () {
+    if (gs == 0) {
+        Game_Start()
+        gs += 1
+    }
+})
+function Game_Start () {
+    h1 = game.createSprite(0, 0)
+    h2 = game.createSprite(1, 0)
+    h3 = game.createSprite(2, 0)
+    hp = 3
+    gs = 0
+    game.setLife(3)
+    player = game.createSprite(1, 4)
+}
 input.onButtonPressed(Button.B, function () {
     jump()
 })
@@ -33,19 +48,22 @@ function jump () {
     basic.pause(100)
     player.change(LedSpriteProperty.Y, 1)
 }
+let player: game.LedSprite = null
+let h1: game.LedSprite = null
+let h2: game.LedSprite = null
+let h3: game.LedSprite = null
+let hp = 0
 let isE = 0
 let e: game.LedSprite = null
-let player: game.LedSprite = null
-let hp = 0
-let h3: game.LedSprite = null
-let h2: game.LedSprite = null
-let h1: game.LedSprite = null
-h1 = game.createSprite(0, 0)
-h2 = game.createSprite(1, 0)
-h3 = game.createSprite(2, 0)
-hp = 3
-game.setLife(3)
-player = game.createSprite(1, 4)
+let gs = 0
+gs = 0
+basic.showLeds(`
+    . . # . .
+    . # . . .
+    # # # # #
+    . # . . .
+    . . # . .
+    `)
 basic.forever(function () {
     basic.pause(randint(500, 2000))
     Create_Enemy()
